@@ -27,3 +27,8 @@ six>=1.14
 joblib
 memoized-property
 termcolor
+
+# Project custom packages
+plotly
+statsmodels
+yellowbrick
