@@ -1,7 +1,7 @@
 # Python version
 FROM python:3.8.6-buster
 # Custom port
-EXPOSE 8080
+EXPOSE 8501
 # Work Directory
 WORKDIR /app
 # Preparing the environment
