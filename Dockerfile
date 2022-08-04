@@ -12,5 +12,5 @@ RUN pip install -r requirements.txt
 COPY music_similarity/* /app/music_similarity/
 COPY raw_data/* /app/raw_data/
 COPY app.py /app/
-# Run app.py
+# Executing command to run app.py
 CMD streamlit run app.py
