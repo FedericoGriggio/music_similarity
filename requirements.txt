@@ -10,26 +10,26 @@ pandas
 scikit-learn
 
 # tests/linter
-black
-coverage
-flake8
-pytest
-yapf
+#black
+#coverage
+#flake8
+#pytest
+#yapf
 
 # API
-gcsfs
-google-cloud-storage
-mlflow
-s3fs
+#gcsfs
+#google-cloud-storage
+#mlflow
+#s3fs
 
 # utilities
-six>=1.14
-joblib
-memoized-property
+#six>=1.14
+#joblib
+#memoized-property
 termcolor
 
 # Project custom packages
-plotly
-statsmodels
-yellowbrick
+#plotly
+#statsmodels
+#yellowbrick
 streamlit
