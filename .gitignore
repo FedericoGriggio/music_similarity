@@ -7,3 +7,7 @@
 .python-version
 raw_data/.keep
 notebooks/music_similarity_study.ipynb
+# added by helyne
+raw_data/final.csv
+raw_data/spotify_tracks.csv
+.vscode/

@@ -6,6 +6,7 @@ import numpy as np
 from music_similarity.search_engine import SearchEngine
 from music_similarity.preprocessor import Preprocessor
 from music_similarity.playlist import Playlist
+from music_similarity.query_spotify_api import get_track_attrs
 
 '''
 streamlit dummy app 04/08/2022
@@ -17,6 +18,8 @@ st.markdown('''
 
 title = st.text_input('Title', 'A Sort Of Homecoming')
 artist = st.text_input('Artist', 'U2')
+
+spotify = get_track_attrs(artist, title)
 
 if 'se' in globals():
     del se
