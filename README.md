@@ -1,10 +1,8 @@
 # Data analysis
 - Document here the project: music_similarity
-- Description: Project Description
-- Data Source:
-- Type of analysis:
-
-Please document the project the better you can.
+- Description: Project aimed to find similarity between songs
+- Data Source: Spotify API
+- Type of analysis: K-NN Recommender
 
 # Startup the project
 
