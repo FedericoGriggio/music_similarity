@@ -32,3 +32,4 @@ termcolor
 plotly
 statsmodels
 yellowbrick
+streamlit
