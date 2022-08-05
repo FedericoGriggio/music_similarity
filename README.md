@@ -15,7 +15,7 @@ deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
     pip install pip -U; pip install -r requirements.txt
 ```
 
-Add spotipy credentials as environment variables
+Add spotipy credentials as environment variables:
 ```bash
 export SPOTIPY_CLIENT_ID='123...abc'
 export SPOTIPY_CLIENT_SECRET='456...def'
