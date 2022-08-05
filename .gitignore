@@ -11,3 +11,4 @@ notebooks/music_similarity_study.ipynb
 raw_data/final.csv
 raw_data/spotify_tracks.csv
 .vscode/
+creds.sh
