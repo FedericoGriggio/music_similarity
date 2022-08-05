@@ -1,0 +1,37 @@
+h2 {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 600;
+  color: #4F8BF9;
+  letter-spacing: -0.005em;
+  padding: 1rem 0px;
+  margin: 0px;
+  line-height: 1.2;
+}
+body {
+  color: #fff;
+  background-color: #4F8BF9;
+}
+
+.stbutton>button {
+  color:#4F8BF9;
+  border-radius: 50%;
+  height: 3em;
+  width:3em;
+}
+
+.stTextInput>div>div>input {
+  color:#4F8BF9;
+}
+
+.css-15tx938 {
+  font-size: 14px;
+  color: rgb(49, 51, 63);
+  margin-bottom: 0.5rem;
+  height: auto;
+  min-height: 0rem;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+}
