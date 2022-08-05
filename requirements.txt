@@ -33,3 +33,4 @@ termcolor
 #statsmodels
 #yellowbrick
 streamlit
+spotipy
