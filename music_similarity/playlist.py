@@ -28,14 +28,27 @@ class Playlist():
         '''
         Model builder function
         '''
+        # Define the model
         self.model=NearestNeighbors(
             n_neighbors=self.playlist_songs + 1).fit(
             self.preprocessor.X_mmscaled)
+        # Extract index and distance of self.playlist_songs+1
+        # number of colest songs
         self.distance, self.index=self.model.kneighbors(
             self.preprocessor.X_target_mmscaled,
             n_neighbors=self.playlist_songs + 1)
+        # Copy found index rows from the original not scaled dataset
         self.playlist = self.se.data.iloc[self.index[0],:]
         self.playlist['distance'] = self.distance[0]
+        # Remove the target song from the list
         self.playlist = self.playlist.tail(self.playlist_songs)
-        self.playlist = self.playlist.sort_values(by=[
-            'popularity'], ascending=False, ignore_index=True)
+        # Ordering the playlist on distance, ascending order
+        self.playlist = self.playlist.sort_values(
+            by=['distance'], ascending=True, ignore_index=True)
+        # Drop not necessary columns
+        self.playlist = self.playlist[['name', 'artists', 'distance']]
+        # Strip square brackets from the artists strings
+        self.playlist['artists'] = self.playlist['artists'].apply(
+            lambda x: x.strip("['").strip("']"))
+        # Set starting index from 0 to 1
+        self.playlist.index += 1
