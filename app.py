@@ -58,7 +58,7 @@ with col2:
 
 if 'se' in globals():
     del se
-spotify = pd.read_csv('raw_data/full_data.csv')
+spotify = pd.read_csv('raw_data/full_data.csv', index_col=0)
 se = SearchEngine(spotify)
 try:
     se.target_song(title, artist)
@@ -74,7 +74,6 @@ try:
 except:
     # Error if the song is not found
     st.error("We don't know this song, sorry! Try another one")
-    st.stop()
 
 if 'playlist' in globals():
     del playlist
