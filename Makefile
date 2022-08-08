@@ -41,15 +41,14 @@ count_lines:
         '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
 
-# ----------------------------------
-#      UPLOAD PACKAGE TO PYPI
-# ----------------------------------
-PYPI_USERNAME=<AUTHOR>
-build:
-	@python setup.py sdist bdist_wheel
+##### Package params  - - - - - - - - - - - - - - - - - - -
 
-pypi_test:
-	@twine upload -r testpypi dist/* -u $(PYPI_USERNAME)
+PACKAGE_NAME=music_similarity
+FILENAME=playlist
 
-pypi:
-	@twine upload dist/* -u $(PYPI_USERNAME)
+run_locally:
+	@python -m ${PACKAGE_NAME}.${FILENAME}
+
+
+streamlit:
+	@streamlit run app.py
