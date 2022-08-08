@@ -29,8 +29,8 @@ class Preprocessor():
         Adapting data function
         '''
         # drop non numerical features before scaling
-        self.X=self.se.data.drop(columns=['name','artists'])
-        self.X_target=self.se.target.drop(columns=['name','artists'])
+        self.X=self.se.data.drop(columns=['name','artists', 'uri'])
+        self.X_target=self.se.target.drop(columns=['name','artists', 'uri'])
         # fit and transofrm with MinMaxScaler
         mmscaler = MinMaxScaler().fit(self.X)
         self.X_mmscaled=mmscaler.transform(self.X)
