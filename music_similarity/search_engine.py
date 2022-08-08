@@ -38,5 +38,3 @@ class SearchEngine():
         self.artist = self.target["artists"].to_string(
             index=False).strip("['").strip("']")
         self.title = self.target["name"].to_string(index=False)
-        print(f'TITLE: {self.title}')
-        print(f'ARTIST: {self.artist}')
