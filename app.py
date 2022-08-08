@@ -49,31 +49,38 @@ st.text('Tell us a song that you like:')
 # User input for song name and artist
 col1, col2 = st.columns(2)
 with col1:
-    title = st.text_input("", "Song Title...")
+    title = st.text_input("Title", "Another One Bites The Dust")
 with col2:
-    artist = st.text_input("", "Artist Name...")
+    artist = st.text_input("Artist", "Queen")
 
 # Find the track from API
-spotify = get_track_attrs(artist, title)
-
-# Error if the song is not found
-st.error("We don't know this song, sorry! Try another one")
+# spotify = get_track_attrs(artist, title)
 
 if 'se' in globals():
     del se
-spotify = pd.read_csv('raw_data/ML_spotify_data.csv')
+spotify = pd.read_csv('raw_data/full_data.csv')
 se = SearchEngine(spotify)
-se.target_song(title, artist)
+try:
+    se.target_song(title, artist)
+except:
+    # Error if the song is not found
+    st.error("We don't know this song, sorry! Try another one")
 
 if 'preprocessor' in globals():
     del preprocessor
 preprocessor = Preprocessor(se)
-preprocessor.scale_data()
+try:
+    preprocessor.scale_data()
+except:
+    # Error if the song is not found
+    st.error("We don't know this song, sorry! Try another one")
+    st.stop()
 
 if 'playlist' in globals():
     del playlist
 playlist = Playlist(preprocessor, se)
 playlist.build_model()
 
+st.text(f'You have selected: {se.title} - {se.artist}')
 st.text('We think you might like these songs:')
 st.table(playlist.playlist)
