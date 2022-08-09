@@ -35,3 +35,22 @@ body {
   -webkit-box-align: center;
   align-items: center;
 }
+
+.css-1cpxqw2 {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  font-weight: 400;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  margin: 0px;
+  line-height: 1.6;
+  color: inherit;
+  width: auto;
+  user-select: none;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(49, 51, 63, 0.2);
+  color:#4F8BF9;
+}
