@@ -70,6 +70,7 @@ if 'ae' in globals():
 if 'playlist' in globals():
     del playlist
 
+# After user searches their song, run model
 if button_clicked:
     spotify = pd.read_csv('raw_data/full_data.csv', index_col=0)
     se = SearchEngine(spotify)
