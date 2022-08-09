@@ -54,6 +54,9 @@ with col1:
 with col2:
     artist = st.text_input("Artist", "Queen")
 
+# Create search button
+button_clicked = st.button("Search")
+
 # Find the track from API
 # spotify = get_track_attrs(artist, title)
 
@@ -67,30 +70,32 @@ if 'ae' in globals():
 if 'playlist' in globals():
     del playlist
 
-spotify = pd.read_csv('raw_data/full_data.csv', index_col=0)
-se = SearchEngine(spotify)
-ae = ApiExtractor(se)
-se.target_song(title, artist) # Check if the song is in the local database
-ae.get_track_full_attrs(title, artist) # Perform the get request
-preprocessor = Preprocessor(se, ae)
-try:
-    preprocessor.scale_se()
-    # If is not, request the song to Spotify
-except:
+# After user searches their song, run model
+if button_clicked:
+    spotify = pd.read_csv('raw_data/full_data.csv', index_col=0)
+    se = SearchEngine(spotify)
+    ae = ApiExtractor(se)
+    se.target_song(title, artist) # Check if the song is in the local database
+    ae.get_track_full_attrs(title, artist) # Perform the get request
+    preprocessor = Preprocessor(se, ae)
     try:
-        preprocessor.scale_ae()
+        preprocessor.scale_se()
+        # If is not, request the song to Spotify
     except:
-        # If is not present in the Spotify database show an error
-        st.error("Sorry, this song is not available, try another one")
+        try:
+            preprocessor.scale_ae()
+        except:
+            # If is not present in the Spotify database show an error
+            st.error("Sorry, this song is not available, try another one")
+        else:
+            song_title = ae.tfa_song_name
+            song_artist = ae.tfa_song_artists
     else:
-        song_title = ae.tfa_song_name
-        song_artist = ae.tfa_song_artists
-else:
-    song_title = se.title
-    song_artist = se.artist
-song_artist = str(song_artist).strip("['").strip("']")
-playlist = Playlist(preprocessor, se)
-playlist.build_model()
-st.text(f'You have selected: {song_title} - {song_artist}')
-st.text('We think you might like these songs:')
-st.table(playlist.playlist)
+        song_title = se.title
+        song_artist = se.artist
+    song_artist = str(song_artist).strip("['").strip("']")
+    playlist = Playlist(preprocessor, se)
+    playlist.build_model()
+    st.text(f'You have selected: {song_title} - {song_artist}')
+    st.text('We think you might like these songs:')
+    st.table(playlist.playlist)
