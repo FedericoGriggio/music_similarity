@@ -54,6 +54,7 @@ with col1:
 with col2:
     artist = st.text_input("Artist", "Queen")
 
+# Create search button
 button_clicked = st.button("Search")
 
 # Find the track from API
