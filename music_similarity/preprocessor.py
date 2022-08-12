@@ -11,7 +11,7 @@ from sklearn import set_config
 set_config(display = "diagram")
 
 # Scaling
-from sklearn.preprocessing import RobustScaler, StandardScaler, MinMaxScaler
+from sklearn.preprocessing import RobustScaler, StandardScaler, MinMaxScaler, OneHotEncoder
 
 # Package classes
 from music_similarity.search_engine import SearchEngine
@@ -27,35 +27,54 @@ class Preprocessor():
         self.se = se
         # Api Extractor
         self.ae = ae
+        # Categorical columns
+        self.categorical_features = ['key', 'mode', 'explicit']
+        # Numerical columns
+        self.numeric_features = ['energy', 'loudness',
+                                 'acousticness', 'instrumentalness',
+                                 'liveness',
+                                 'valence', 'tempo', 'sp1',
+                                 'sp2', 'sp3', 'sp4', 'sp5',
+                                 'sp6', 'sp7', 'sp8', 'sp9',
+                                 'sp10', 'sp11', 'sp12', 'tm1',
+                                 'tm2', 'tm3', 'tm4', 'tm5',
+                                 'tm6', 'tm7', 'tm8', 'tm9',
+                                 'tm10', 'tm11', 'tm12']
+        # Categorical transformer
+        self.categorical_transformer = Pipeline(steps=[(
+            'onehot', OneHotEncoder(handle_unknown='ignore'))])
+        # Numerical transformer
+        self.numeric_transformer = Pipeline(steps=[(
+            'scaler', MinMaxScaler())])
+        # Transformer
+        self.transformer = ColumnTransformer(
+            transformers=[
+                ('minmax', self.numeric_transformer, self.numeric_features),
+                ('cat', self.categorical_transformer, self.categorical_features)])
 
     def scale_se(self):
         '''
         Adapting data with target song present in the local dataset
         '''
-        # drop non numerical features before scaling
-        self.X=self.se.data.drop(columns=['name','artists', 'uri'])
-        self.X_target=self.se.target.drop(columns=['name','artists', 'uri'])
-        # fit and transofrm with MinMaxScaler
-        mmscaler = MinMaxScaler().fit(self.X)
-        self.X_mmscaled=mmscaler.transform(self.X)
-        self.X_target_mmscaled=mmscaler.transform(self.X_target)
-        # fit and transofrm with RobustScaler
-        roscaler = RobustScaler().fit(self.X)
-        self.X_roscaled=roscaler.transform(self.X)
-        self.X_target_roscaled=roscaler.transform(self.X_target)
+        # Fit and transform data and target
+        self.X_mmscaled = self.transformer.fit_transform(self.se.data)
+        # Only apply a transformation to the target
+        self.X_target_mmscaled = self.transformer.transform(self.se.target)
+        # Transform np.array to dataset
+        self.X_mmscaled = pd.DataFrame(self.X_mmscaled,
+                        columns=self.transformer.get_feature_names_out())
+        self.X_target_mmscaled = pd.DataFrame(self.X_target_mmscaled,
+                        columns=self.transformer.get_feature_names_out())
 
     def scale_ae(self):
         '''
-        Adapting data with target song present in the local dataset
+        Adapting data with target song present in Spotify database
         '''
-        # drop non numerical features before scaling
-        self.X=self.se.data.drop(columns=['name','artists', 'uri'])
-        self.X_target=self.ae.df_tfa.drop(columns=['name','artists', 'uri'])
-        # fit and transofrm with MinMaxScaler
-        mmscaler = MinMaxScaler().fit(self.X)
-        self.X_mmscaled=mmscaler.transform(self.X)
-        self.X_target_mmscaled=mmscaler.transform(self.X_target)
-        # fit and transofrm with RobustScaler
-        roscaler = RobustScaler().fit(self.X)
-        self.X_roscaled=roscaler.transform(self.X)
-        self.X_target_roscaled=roscaler.transform(self.X_target)
+        # Fit and transform data and target
+        self.X_mmscaled = self.transformer.fit_transform(self.se.data)
+        self.X_target_mmscaled = self.transformer.transform(self.ae.df_tfa)
+        # Transform np.array to dataset
+        self.X_mmscaled = pd.DataFrame(self.X_mmscaled,
+                        columns=self.transformer.get_feature_names_out())
+        self.X_target_mmscaled = pd.DataFrame(self.X_target_mmscaled,
+                        columns=self.transformer.get_feature_names_out())
