@@ -22,7 +22,7 @@ class Playlist():
         '''
         self.preprocessor = preprocessor
         self.se = se
-        self.playlist_songs = 10
+        self.playlist_songs = 15
 
     def build_model(self):
         '''

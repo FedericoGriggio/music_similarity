@@ -28,10 +28,10 @@ class Preprocessor():
         # Api Extractor
         self.ae = ae
         # Categorical columns
-        self.categorical_features = ['key', 'mode', 'explicit']
+        self.categorical_features = ['key']
         # Numerical columns
-        self.numeric_features = ['energy', 'loudness',
-                                 'acousticness', 'instrumentalness',
+        self.numeric_features = ['acousticness', 'energy',
+                                 'instrumentalness',
                                  'liveness',
                                  'valence', 'tempo', 'sp1',
                                  'sp2', 'sp3', 'sp4', 'sp5',
@@ -39,13 +39,17 @@ class Preprocessor():
                                  'sp10', 'sp11', 'sp12', 'tm1',
                                  'tm2', 'tm3', 'tm4', 'tm5',
                                  'tm6', 'tm7', 'tm8', 'tm9',
-                                 'tm10', 'tm11', 'tm12']
+                                 'tm10', 'tm11', 'tm12', 'mode']
+        self.string_features = ['name', 'artists']
         # Categorical transformer
         self.categorical_transformer = Pipeline(steps=[(
             'onehot', OneHotEncoder(handle_unknown='ignore'))])
         # Numerical transformer
         self.numeric_transformer = Pipeline(steps=[(
             'scaler', MinMaxScaler())])
+        # String transformer
+        # self.string_transformer = Pipeline(steps=[(
+        #     'pass', 'passthrough')])
         # Transformer
         self.transformer = ColumnTransformer(
             transformers=[
