@@ -1,31 +1,58 @@
+/* Background color */
+.appview-container {
+  background: #f2e9e4;
+}
+
+/* Header Image */
+header[data-testid="stHeader"] {
+  background: url('https://raw.githubusercontent.com/FedericoGriggio/music_similarity/master/images/record.png');
+  height: 10.875rem
+}
+
+/* Main content placement */
+.block-container {
+  padding: 12rem 1rem 10rem
+}
+
 h2 {
   font-family: "Source Code Pro", monospace;
   font-weight: 600;
-  color: #4F8BF9;
+  color: #968b94;
   letter-spacing: -0.005em;
   padding: 1rem 0px;
   margin: 0px;
   line-height: 1.2;
 }
+p, ol, ul, dl {
+  margin: 0px 0px 1rem;
+  padding: 0px;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Source Code Pro", monospace;
+  color: #9a8c98;
+}
+
 body {
   color: #fff;
-  background-color: #4F8BF9;
+  background-color: #9a8c98;
 }
 
 .stbutton>button {
-  color:#4F8BF9;
+  color:#9a8c98;
   border-radius: 50%;
   height: 3em;
   width:3em;
 }
 
 .stTextInput>div>div>input {
-  color:#4F8BF9;
+  color:#9a8c98;
 }
 
 .css-15tx938 {
+  font-family: "Source Code Pro", monospace;
   font-size: 14px;
-  color: rgb(49, 51, 63);
+  color: #968b94;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   height: auto;
   min-height: 0rem;
@@ -35,6 +62,7 @@ body {
   -webkit-box-align: center;
   align-items: center;
 }
+
 
 .css-1cpxqw2 {
   display: inline-flex;
@@ -51,5 +79,11 @@ body {
   user-select: none;
   background-color: rgb(255, 255, 255);
   border: 1px solid rgba(49, 51, 63, 0.2);
-  color:#4F8BF9;
+  color:#9a8c98;
+  font-family: "Source Code Pro", monospace;
+}
+
+.stTextInput>div>div>input {
+  color: #9a8c98;
+  font-family: "Source Code Pro", monospace;
 }
