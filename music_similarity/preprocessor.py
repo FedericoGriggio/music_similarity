@@ -30,16 +30,20 @@ class Preprocessor():
         # Categorical columns
         self.categorical_features = ['key']
         # Numerical columns
-        self.numeric_features = ['acousticness', 'energy',
+        self.numeric_features = ['acousticness',
+                                 'energy',
                                  'instrumentalness',
-                                 'liveness',
-                                 'valence', 'tempo', 'sp1',
+                                 'valence',
+                                 'tempo',
+                                 'mode',
+                                 'danceability',
+                                 'sp1',
                                  'sp2', 'sp3', 'sp4', 'sp5',
                                  'sp6', 'sp7', 'sp8', 'sp9',
                                  'sp10', 'sp11', 'sp12', 'tm1',
                                  'tm2', 'tm3', 'tm4', 'tm5',
                                  'tm6', 'tm7', 'tm8', 'tm9',
-                                 'tm10', 'tm11', 'tm12', 'mode']
+                                 'tm10', 'tm11', 'tm12']
         self.string_features = ['name', 'artists']
         # Categorical transformer
         self.categorical_transformer = Pipeline(steps=[(
