@@ -38,21 +38,18 @@ def icon(icon_name):
 local_css("style.css")
 remote_css('https://fonts.googleapis.com/icon?family=Material+Icons')
 
-'''
-streamlit dummy app 05/08/2022
-'''
 # The title of our app
 st.markdown('''
 ## Discover some new songs!
+Tell us a song that you like:
 ''')
-st.text('Tell us a song that you like:')
 
 # User input for song name and artist
 col1, col2 = st.columns(2)
 with col1:
-    title = st.text_input("Title", "Another One Bites The Dust")
+    title = st.text_input("Title:", "Another One Bites The Dust")
 with col2:
-    artist = st.text_input("Artist", "Queen")
+    artist = st.text_input("Artist:", "Queen")
 
 # Create search button
 button_clicked = st.button("Search")
